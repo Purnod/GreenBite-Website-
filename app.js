@@ -176,3 +176,44 @@ tipBox.addEventListener("click", () => {
 //         tipBox.classList.remove("expanded");
 //     }
 // });
+
+
+
+
+// contact page 
+
+document.getElementById("feedbackForm").addEventListener("submit", function(e) {
+e.preventDefault();
+
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let message = document.getElementById("message").value.trim();
+    let type = document.querySelector("input[name='type']:checked");
+
+    if (!name || !email || !message || !type) {
+        alert("Please fill in all fields.");
+        return;}
+
+    let feedback = {
+        name: name,
+        email: email,
+        message: message,
+        type: type.value,
+        date: new Date().toLocaleString()
+      };
+
+    // Save to localStorage
+    let stored = JSON.parse(localStorage.getItem("feedbacks")) || [];
+    stored.push(feedback);
+    localStorage.setItem("feedbacks", JSON.stringify(stored));
+
+    document.getElementById("confirmation").textContent = "Thank you! Your feedback has been submitted.";
+    document.getElementById("feedbackForm").reset();
+    });
+
+    // FAQ toggle
+    document.querySelectorAll(".faq-item").forEach(item => {
+    item.addEventListener("click", () => {
+        item.classList.toggle("active");
+      });
+    });
