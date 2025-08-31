@@ -39,6 +39,27 @@ link.addEventListener("mouseleave", function(){
    this.style.color = "white"
 });
 });
+// news letter 
+let form = document.getElementById("newsletterForm");
+let emailInput = document.getElementById("newsletterEmail");
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault(); // prevent page reload
+
+    // Browser HTML validation will already run here
+    if (!emailInput.checkValidity()) {
+        emailInput.reportValidity(); // show default validation message
+        return;
+    }
+
+    // Only push if valid
+    let emails = JSON.parse(localStorage.getItem("emails") || "[]");
+    emails.push(emailInput.value);
+    localStorage.setItem("emails", JSON.stringify(emails));
+
+    alert("Subscribed!");
+    emailInput.value = ""; // reset field
+});
 
 //Title change 
 
@@ -72,27 +93,27 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             title: "Stay Hydrated ",
             desc: "Sip water steadily throughout the day. Start with a glass when you wake up and keep a bottle nearby — hydration helps focus, digestion and skin health.",
-            img: "https://goldcoastpt.com/wp-content/uploads/2023/07/importance-of-hydration-fyzical.jpg"
+            img: "Stay Hydrated.jpg"
         },
         {
             title: "Add One More Green ",
             desc: "Add an extra handful of leafy greens to any meal — salads, smoothies, or sandwiches. Greens are high in fiber and micronutrients with very few calories.",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoiRZLcllbfCTuvJCWKYiXuYYBj_LYAnDsiA&s"
+            img: "Add One More Green.jpeg"
         },
         {
             title: "Move for 10 Minutes ",
             desc: "Micro-workouts add up. A brisk 10-minute walk after a meal helps digestion and raises your daily activity without needing a full workout session.",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7eLnI0hZzJMkrUwnTshc91Bj_uvDSQ_5VFQ&s"
+            img: "Move for 10 Minutes.jpeg"
         },
         {
             title: "Prioritize Sleep ",
             desc: "Keep a consistent bedtime and wind down 30 minutes before sleep—no screens, dim the lights, and relax. Good sleep supports immunity and mental clarity.",
-            img: "https://domf5oio6qrcr.cloudfront.net/medialibrary/16297/gettyimages-1448461961.jpg"
+            img: "Prioritize Sleep.jpg"
         },
         {
             title: "Small Protein Boost ",
             desc: "Add a palm-sized serving of protein to your meals (eggs, beans, yogurt, fish). Protein helps satiety and supports muscle repair.",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS82fLqSbKydbweRQjk5zEBInhd_MwLzwb6_g&s"
+            img: "Small Protein Boost.jpeg"
         }
     ];
 
@@ -111,16 +132,13 @@ document.addEventListener("DOMContentLoaded", () => {
     descEl.textContent = todayTip.desc;
     tipBox.style.backgroundImage = `url("${todayTip.img}")`;
 
-    arrowEl.addEventListener("click", (ev) => {
-        ev.stopPropagation();
-        tipBox.classList.add("expanded");
-    });
-
-    tipBox.addEventListener("click", () => {
-        if (tipBox.classList.contains("expanded")) {
-            tipBox.classList.remove("expanded");
-        }
-    });
+tipBox.addEventListener("click", () => {
+    tipBox.classList.toggle("expanded"); 
+    arrowEl.innerHTML = tipBox.classList.contains("expanded") 
+        ? '<i class="fa fa-chevron-circle-up" aria-hidden="true"></i>' 
+        : '<i class="fa fa-chevron-circle-down" aria-hidden="true"></i>';
+});
+})
 
         // testing rotation 5 seconds 
 
@@ -158,4 +176,3 @@ document.addEventListener("DOMContentLoaded", () => {
 //         tipBox.classList.remove("expanded");
 //     }
 // });
-});
