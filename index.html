@@ -20,7 +20,7 @@
 
 <div class="content">
 
-<!-- Home page  -->
+<!-- Home page  --> 
  
 <div id="home" class="page">
     
@@ -45,8 +45,37 @@
 <!-- Recipes page  -->
 <div id="recipes" class="page">
 
-    <h1>Recipes</h1>
+<div class="filters">
+    <input type="text" id="search" placeholder="Search by name...">
+    <select id="category">
+      <option value="all">All Categories</option>
+      <option value="dessert">Dessert</option>
+      <option value="main">Main Course</option>
+      <option value="Lunch"> Lunch </option>
+    </select>
+</div>
 
+  <div class="recipes" id="recipe-list"></div>
+
+  <!-- Modal -->
+  <div class="modal" id="recipeModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <h2 id="modalTitle"></h2>
+
+        <h3 id="IngredientsTitle">Ingredients</h3>
+        <ul id="modalIngredients"></ul>
+
+        <h3 id="StepsTitle">Steps</h3>
+        <ol id="modalSteps"></ol>
+
+        <h3>Nutrition Info</h3>
+
+        <table id="modalNutrition"></table>
+    </div>
+   </div>
+   <br>
 </div>
 
 <!-- Calorie & Nutrition Calculator page  -->
@@ -127,6 +156,7 @@
              </div>
         </div>
  </div>
+</div>
 <footer>
     <div class="footer-container">
         <div class="footer-left">
