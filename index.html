@@ -95,9 +95,62 @@
 <!-- Mindfulness page  -->
 <div id="mindfulness" class="page">
 
-        <h1>Mindfulness</h1>
+    <div id="mindfulness" class="page">
 
+  <!-- Breathing Exercise -->
+  <div class="breathing-section">
+    <img src="heart.png" alt="Breathing Heart" id="heart">
+    <p id="breathText">Ready</p>
+    <div class="button-row">
+      <button onclick="startBreathing()">Start Breathing</button>
+      <button onclick="stopBreathing()">Stop Breathing</button>
+    </div>
+  </div>
+
+  <!-- Tools Row (Timer + Sounds + Sessions) -->
+  <div class="tools-row">
+
+    <!-- Meditation Timer -->
+    <div class="tool timer">
+      <h3 id="Meditation_heading" >Meditation Timer</h3>
+      <select id="timerSelect">
+        <option value="1">1 min</option>
+        <option value="5">5 min</option>
+        <option value="10">10 min</option>
+        <option value="15">15 min</option>
+        <option value="20">20 min</option>
+        <option value="30">30 min</option>
+      </select>
+      <div id="timerDisplay">00:00</div>
+      <div class="button-row">
+        <button onclick="startTimer()">Start Timer</button>
+        <button onclick="stopTimer()">Stop Timer</button>
+      </div>
+    </div>
+
+    <!-- Ambient Sound Selector -->
+    <div class="tool sounds">
+      <h3 id="sound_heading" >Ambient Sounds</h3>
+      <select id="sound_Select">
+        <option value="rain.mp3">Rain</option>
+        <option value="waves.mp3">Waves</option>
+        <option value="forest.mp3">Forest</option>
+      </select>
+      <div class="button-row" id="ambient_button">
+        <button onclick="startSound()">Start Sound</button>
+        <button onclick="stopSound()">Stop Sound</button>
+      </div>
+    </div>
+
+    <!-- Session Tracker -->
+    <div class="tool tracker">
+      <h3>Sessions Completed</h3>
+      <p id="sessionTracker">0</p>
+    </div>
+
+  </div>
 </div>
+
 
 <!-- Contact page  -->
 <div id="contact" class="page">

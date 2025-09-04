@@ -306,3 +306,96 @@ function openModal(recipe) {
     categoryFilter.addEventListener("change", displayRecipes);
 
     displayRecipes();
+
+  // midfullness page 
+
+// --- Session Tracker ---
+let sessions = localStorage.getItem("sessions") || 0;
+document.getElementById("sessionTracker").innerText = " " + sessions;
+
+// --- Breathing Exercise ---
+let breathingInterval;
+function startBreathing() {
+  let heart = document.getElementById("heart");
+  let text = document.getElementById("breathText");
+  let inhale = true;
+
+  clearInterval(breathingInterval);
+
+  // Trigger immediately on start
+  heart.classList.add("breathing-grow");
+  text.innerText = "Inhale...";
+  inhale = false; // so the next cycle will be exhale
+
+  // Continue with the 4s cycle
+  breathingInterval = setInterval(() => {
+    if (inhale) {
+      heart.classList.add("breathing-grow");
+      text.innerText = "Inhale...";
+    } else {
+      heart.classList.remove("breathing-grow");
+      text.innerText = "Exhale...";
+    }
+    inhale = !inhale;
+  }, 4000);
+}
+
+function stopBreathing() {
+  clearInterval(breathingInterval);
+  document.getElementById("heart").classList.remove("breathing-grow");
+  document.getElementById("breathText").innerText = "Stopped";
+}
+
+// --- Meditation Timer ---
+let timerInterval;
+let alarmSound = new Audio("bell.mp3");
+
+function startTimer() {
+  let minutes = parseInt(document.getElementById("timerSelect").value);
+  let display = document.getElementById("timerDisplay");
+  let time = minutes * 60;
+
+  clearInterval(timerInterval);
+
+  timerInterval = setInterval(() => {
+    let min = Math.floor(time / 60);
+    let sec = time % 60;
+    display.innerText = `${min}:${sec.toString().padStart(2, "0")}`;
+
+    if (time <= 0) {
+      clearInterval(timerInterval);
+      alarmSound.play();
+      setTimeout(() => {
+        alert("Meditation timer is up!");
+        }, 100);
+      sessions++;
+      localStorage.setItem("sessions", sessions);
+      document.getElementById("sessionTracker").innerText = "" + sessions;
+    }
+    time--;
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+  document.getElementById("timerDisplay").innerText = "00:00";
+}
+
+// --- Ambient Sounds ---
+let currentSound;
+
+function startSound() {
+  let selected = document.getElementById("sound_Select").value;
+  stopSound(); // stop previous
+  currentSound = new Audio(selected);
+  currentSound.loop = true;
+  currentSound.play();
+}
+
+function stopSound() {
+  if (currentSound) {
+    currentSound.pause();
+    currentSound.currentTime = 0;
+  }
+}
+
