@@ -1,4 +1,5 @@
 //slogans 
+
 let slogans = [
   "Eat Green, Live Clean",
   "Fuel Your Body, Naturally",
@@ -399,3 +400,166 @@ function stopSound() {
   }
 }
 
+
+// Calorie Calculator functionality
+// Calorie Calculator functionality
+document.addEventListener("DOMContentLoaded", function() {
+    // Initialize calculator when page loads
+    initCalorieCalculator();
+    
+    // Re-initialize calculator when navigating to it
+    window.addEventListener('hashchange', function() {
+        if (window.location.hash === '#calculator') {
+            initCalorieCalculator();
+        }
+    });
+});
+
+function initCalorieCalculator() {
+    console.log('Initializing calorie calculator');
+    
+    // Utility functions
+    const animateCounter = (el, start, end, duration = 900, fmt = v => Math.round(v)) => {
+        if (!el) return;
+        const t0 = performance.now();
+        const step = (now) => {
+            const p = Math.min(1, (now - t0) / duration);
+            const val = start + (end - start) * p;
+            el.textContent = fmt(val);
+            if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    };
+    
+    const setBarWidth = (el, pct) => { 
+        if (el) el.style.width = Math.max(0, Math.min(100, pct)) + '%'; 
+    };
+    
+    const round1 = n => Math.round(n * 10) / 10;
+
+    // DOM elements
+    const calculatorForm = document.getElementById('calculatorForm');
+    const calcBtn = document.getElementById('calculator-calcBtn');
+    const resetBtn = document.getElementById('calculator-resetBtn');
+    const ageEl = document.getElementById('calculator-age');
+    const heightEl = document.getElementById('calculator-height');
+    const weightEl = document.getElementById('calculator-weight');
+    const activityEl = document.getElementById('calculator-activity');
+    const genderRadios = document.querySelectorAll('input[name="calculator-gender"]');
+
+    const resultsArea = document.getElementById('calculator-resultsArea');
+    const bmrNum = document.getElementById('calculator-bmrNum');
+    const tdeeNum = document.getElementById('calculator-tdeeNum');
+    const carbGrams = document.getElementById('calculator-carbGrams');
+    const proteinGrams = document.getElementById('calculator-proteinGrams');
+    const fatGrams = document.getElementById('calculator-fatGrams');
+    const barCarbs = document.getElementById('calculator-barCarbs');
+    const barProtein = document.getElementById('calculator-barProtein');
+    const barFat = document.getElementById('calculator-barFat');
+
+    // Check if all required elements exist
+    if (!calcBtn || !resultsArea) {
+        console.error('Calculator elements not found');
+        return;
+    }
+
+    // Calculation functions
+    const calcBMR = ({sex, weight, height, age}) =>
+        sex === 'male'
+            ? 10 * weight + 6.25 * height - 5 * age + 5
+            : 10 * weight + 6.25 * height - 5 * age - 161;
+
+    const calcTDEE = (bmr, factor) => bmr * factor;
+    
+    const calcMacros = (tdee) => ({
+        carbsG: (tdee * 0.50) / 4,
+        proteinG: (tdee * 0.20) / 4,
+        fatG: (tdee * 0.30) / 9
+    });
+
+    // Function to perform calculation
+    function performCalculation() {
+        const age = Number(ageEl.value);
+        const height = Number(heightEl.value);
+        const weight = Number(weightEl.value);
+        const gender = document.querySelector('input[name="calculator-gender"]:checked')?.value || 'male';
+        const factor = Number(activityEl.value || '1.2');
+
+        if (!age || age < 10 || age > 120) { 
+            alert('Please enter a valid age between 10 and 120');
+            ageEl.focus();
+            return; 
+        }
+        if (!height || height < 80 || height > 250) { 
+            alert('Please enter a valid height between 80 and 250 cm');
+            heightEl.focus();
+            return; 
+        }
+        if (!weight || weight < 25 || weight > 400) { 
+            alert('Please enter a valid weight between 25 and 400 kg');
+            weightEl.focus();
+            return; 
+        }
+
+        const bmr = calcBMR({sex: gender, weight, height, age});
+        const tdee = calcTDEE(bmr, factor);
+        const { carbsG, proteinG, fatG } = calcMacros(tdee);
+
+        resultsArea.style.display = 'block';
+
+        animateCounter(bmrNum, 0, Math.round(bmr), 900, v => Math.round(v));
+        animateCounter(tdeeNum, 0, Math.round(tdee), 900, v => Math.round(v));
+        animateCounter(carbGrams, 0, round1(carbsG), 900, v => round1(v) + ' g');
+        animateCounter(proteinGrams, 0, round1(proteinG), 900, v => round1(v) + ' g');
+        animateCounter(fatGrams, 0, round1(fatG), 900, v => round1(v) + ' g');
+
+        const animateProgressBar = (el, valuePercent, duration = 900) => {
+            const maxPercent = 95;
+            let startTime = null;
+            const step = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / duration, 1);
+                const width = Math.min(valuePercent * progress, maxPercent);
+                el.style.width = width + '%';
+                if (progress < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        };
+
+        animateProgressBar(barCarbs, (carbsG * 4 / tdee) * 100);
+        animateProgressBar(barProtein, (proteinG * 4 / tdee) * 100);
+        animateProgressBar(barFat, (fatG * 9 / tdee) * 100);
+    }
+
+    // Event handlers - ONLY for the Calculate button
+    if (calcBtn) {
+        calcBtn.addEventListener('click', performCalculation);
+    }
+
+    const clearResults = () => {
+        if (resultsArea) resultsArea.style.display = 'none';
+        if (bmrNum) bmrNum.textContent = '0';
+        if (tdeeNum) tdeeNum.textContent = '0';
+        if (carbGrams) carbGrams.textContent = '0 g';
+        if (proteinGrams) proteinGrams.textContent = '0 g';
+        if (fatGrams) fatGrams.textContent = '0 g';
+        if (barCarbs) setBarWidth(barCarbs, 0);
+        if (barProtein) setBarWidth(barProtein, 0);
+        if (barFat) setBarWidth(barFat, 0);
+    };
+
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            if (calculatorForm) calculatorForm.reset();
+            if (activityEl) activityEl.value = '1.2';
+            clearResults();
+        });
+    }
+
+    // Initialize activity selector
+    if (activityEl) {
+        activityEl.value = '1.2';
+    }
+    
+
+}

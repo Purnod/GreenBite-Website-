@@ -80,8 +80,94 @@
 
 <!-- Calorie & Nutrition Calculator page  -->
  <div id="Calorie&NutritionCalculator" class="page">
+  
+  <main class="calculator-wrap">
+      <h1>Calorie & Nutrition Calculator</h1><br>
 
-        <h1>Calorie & Nutrition Calculator</h1>
+    <div class="calculator-content-row">
+      <!-- Left side: form -->
+      <section class="calculator-card" aria-labelledby="calcHeading">
+        <h2 id="calcHeading" style="font-size:1.05rem;margin:0 0 10px">Your details</h2>
+        <form id="calculatorForm">
+          <div class="calculator-row">
+            <div class="calculator-col">
+              <label for="calculator-age">Age (years)</label>
+              <input id="calculator-age" type="number" placeholder="e.g. 28" required>
+            </div>
+            <div class="calculator-col">
+              <label>Gender</label>
+              <div class="calculator-gender-group" role="radiogroup" aria-label="gender">
+                <label><input type="radio" name="calculator-gender" value="male" checked> Male</label>
+                <label><input type="radio" name="calculator-gender" value="female"> Female</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="calculator-row">
+            <div class="calculator-col">
+              <label for="calculator-height">Height (cm)</label>
+              <input id="calculator-height" type="number" placeholder="e.g. 175" required>
+            </div>
+            <div class="calculator-col">
+              <label for="calculator-weight">Weight (kg)</label>
+              <input id="calculator-weight" type="number" placeholder="e.g. 68" required>
+            </div>
+          </div>
+
+          <div class="calculator-row">
+            <div class="calculator-col" style="min-width:240px">
+              <label for="calculator-activity">Activity level</label>
+              <select id="calculator-activity">
+                <option value="1.2" selected>Sedentary — little or no exercise</option>
+                <option value="1.375">Lightly active — 1–3 days/week</option>
+                <option value="1.55">Moderately active — 3–5 days/week</option>
+                <option value="1.725">Very active — 6–7 days/week</option>
+                <option value="1.9">Super active — physical job / very hard</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="calculator-actions">
+            <button type="button" id="calculator-calcBtn">Calculate</button>
+            <button type="button" id="calculator-resetBtn" class="calculator-secondary">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Right side: results -->
+      <section class="calculator-card" id="calculator-resultsArea" aria-live="polite" style="display:none">
+        <h2 style="margin:0 0 10px">Results</h2>
+        <div class="calculator-results">
+          <div class="calculator-result-box">
+            <div class="calculator-stat"><div class="calculator-num" id="calculator-bmrNum">0</div><div class="calculator-label">BMR (kcal/day)</div></div>
+            <div class="calculator-stat"><div class="calculator-num" id="calculator-tdeeNum">0</div><div class="calculator-label">TDEE (kcal/day)</div></div>
+            <div class="calculator-note">TDEE = BMR × Activity Factor</div>
+          </div>
+          <div class="calculator-result-box">
+            <div style="font-weight:700;margin-bottom:8px">Macronutrients (approx.)</div>
+            <div class="calculator-macros">
+              <div class="calculator-macro-row">
+                <div class="calculator-macro-left">Carbs</div>
+                <div class="calculator-bar-wrap"><div id="calculator-barCarbs" class="calculator-bar calculator-carbs"></div></div>
+                <div class="calculator-label" id="calculator-carbGrams">0 g</div>
+              </div>
+              <div class="calculator-macro-row">
+                <div class="calculator-macro-left">Protein</div>
+                <div class="calculator-bar-wrap"><div id="calculator-barProtein" class="calculator-bar calculator-protein"></div></div>
+                <div class="calculator-label" id="calculator-proteinGrams">0 g</div>
+              </div>
+              <div class="calculator-macro-row">
+                <div class="calculator-macro-left">Fat</div>
+                <div class="calculator-bar-wrap"><div id="calculator-barFat" class="calculator-bar calculator-fat"></div></div>
+                <div class="calculator-label" id="calculator-fatGrams">0 g</div>
+              </div>
+            </div>
+            <div class="calculator-note">Ratio used: 50% carbs / 20% protein / 30% fat (4/4/9 kcal per gram).</div>
+          </div>
+        </div>
+      </section>
+  </main>
+</div>
 
  </div>
 
@@ -94,8 +180,6 @@
 
 <!-- Mindfulness page  -->
 <div id="mindfulness" class="page">
-
-    <div id="mindfulness" class="page">
 
   <!-- Breathing Exercise -->
   <div class="breathing-section">

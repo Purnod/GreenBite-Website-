@@ -576,13 +576,25 @@ textarea {
 /* Mindfullness page */
 
 /* General Layout */
+/* Keep the layout rules but do NOT set display on the ID itself */
 #mindfulness {
+  /* remove display and leave layout properties (if any) */
+  /* We'll enable display only when it's targeted so it respects .page hiding */
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  gap: 50px;
+}
+
+/* Only show and use flex when the element is the target in the URL */
+#mindfulness:target {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
   gap: 50px;
 }
+
 
 /* Breathing Section */
 .breathing-section {
@@ -684,4 +696,197 @@ button {
 
 button:hover {
   background: #45a049;
+}
+
+/* Calorie Calculator Styles */
+.calculator-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.calculator-content-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.calculator-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(9,9,9,.06);
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.calculator-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.calculator-col {
+  flex: 1;
+  min-width: 140px;
+}
+
+.calculator-gender-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(0,0,0,.04);
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+.calculator-gender-group input {
+  margin-right: 6px;
+}
+
+.calculator-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#calculator-calcBtn, #calculator-resetBtn {
+  cursor: pointer;
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+#calculator-calcBtn {
+  background: #2ecc71;
+  color: #fff;
+}
+
+.calculator-secondary {
+  background: #ddd;
+  color: #222;
+}
+
+.calculator-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.calculator-result-box {
+  padding: 14px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #fff, #fbfff9);
+  box-shadow: 0 4px 12px rgba(12,12,12,.04);
+}
+
+.calculator-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.calculator-stat .calculator-num {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.calculator-stat .calculator-label {
+  color: #6b6b6b;
+  font-size: .9rem;
+}
+
+.calculator-macros {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.calculator-macro-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.calculator-macro-left {
+  width: 82px;
+  font-weight: 700;
+}
+
+.calculator-bar-wrap {
+  flex: 1;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 16px;
+}
+
+.calculator-bar {
+  height: 100%;
+  width: 0%;
+  transition: width 900ms cubic-bezier(.2,.8,.2,1);
+}
+
+.calculator-bar.calculator-carbs {
+  background: #4da6ff;
+}
+
+.calculator-bar.calculator-protein {
+  background: #8ad38a;
+}
+
+.calculator-bar.calculator-fat {
+  background: #ffaa66;
+}
+
+.calculator-note {
+  font-size: .9rem;
+  color: #6b6b6b;
+  margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+  .calculator-content-row {
+    flex-direction: column;
+  }
+  
+  .calculator-results {
+    grid-template-columns: 1fr;
+  }
+  
+  .calculator-row {
+    flex-direction: column;
+  }
+  
+  .calculator-actions {
+    flex-direction: column;
+  }
+  
+  #calculator-calcBtn, #calculator-resetBtn {
+    width: 100%;
+  }
+}
+
+/* Form elements */
+.calculator-card label {
+  display: block;
+  font-size: .9rem;
+  margin-bottom: 6px;
+}
+
+.calculator-card input[type=number], 
+.calculator-card select {
+  background: rgba(0,0,0,.04);
+  border: 1px solid rgba(0,0,0,.06);
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  min-width: 120px;
+  width: 100%;
 }
