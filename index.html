@@ -1,329 +1,350 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="description" content="GreenBite Website">
+  <meta name="theme-color" content="#0a6cff" media ="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0e12" media ="(prefers-color-scheme: dark)">
 
-    <title>GreenBite</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="./icons/icon-192x192.png">
+
+  <title>GreenBite</title>
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
 
 </head>
 <body>
 
 <nav>
-    <a href="#home">Home</a>
-    <a href="#recipes">Recipes</a>
-    <a href="#Calorie&NutritionCalculator">Calorie & Nutrition Calculator</a>
-    <a href="#workouts">Workouts</a>
-    <a href="#mindfulness">Mindfulness</a>
-    <a href="#contact">Contact</a>
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#recipes">Recipes</a>
+        <a href="#calculator">Calorie & Nutrition Calculator</a>
+        <a href="#workouts">Workouts</a>
+        <a href="#mindfulness">Mindfulness</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 </nav>
 
 <div class="content">
-
-<!-- Home page  --> 
- 
+<!-- Home page --> 
 <div id="home" class="page">
-    
-    <!-- slogan -->
     <div id="slogan-box">
         <h2 id="slogan-text"></h2>
     </div>
-
-    <!-- health tip of the day  -->
     <h1 id="health_tip">The Health Tip of the day. </h1>
-    
-
     <main class="container">
         <div id="tipbox" class="tip-box">
             <span id="tiptitle" class="tip-heading"></span>
-            <span id="tiparrow", class="arrow"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></span>
+            <span id="tiparrow" class="arrow"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></span>
             <div id="tipdescription" class="tip-description"></div>
         </div>
     </main>
 </div>
 
-<!-- Recipes page  -->
+<!-- Recipes page -->
 <div id="recipes" class="page">
-
-<div class="filters">
-    <input type="text" id="search" placeholder="Search by name...">
-    <select id="category">
-      <option value="all">All Categories</option>
-      <option value="dessert">Dessert</option>
-      <option value="main">Main Course</option>
-      <option value="Lunch"> Lunch </option>
-    </select>
-</div>
-
-  <div class="recipes" id="recipe-list"></div>
-
-  <!-- Modal -->
-  <div class="modal" id="recipeModal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-
-        <h2 id="modalTitle"></h2>
-
-        <h3 id="IngredientsTitle">Ingredients</h3>
-        <ul id="modalIngredients"></ul>
-
-        <h3 id="StepsTitle">Steps</h3>
-        <ol id="modalSteps"></ol>
-
-        <h3>Nutrition Info</h3>
-
-        <table id="modalNutrition"></table>
-    </div>
-   </div>
-   <br>
-</div>
-
-<!-- Calorie & Nutrition Calculator page  -->
- <div id="Calorie&NutritionCalculator" class="page">
-  
-  <main class="calculator-wrap">
-      <h1>Calorie & Nutrition Calculator</h1><br>
-
-    <div class="calculator-content-row">
-      <!-- Left side: form -->
-      <section class="calculator-card" aria-labelledby="calcHeading">
-        <h2 id="calcHeading" style="font-size:1.05rem;margin:0 0 10px">Your details</h2>
-        <form id="calculatorForm">
-          <div class="calculator-row">
-            <div class="calculator-col">
-              <label for="calculator-age">Age (years)</label>
-              <input id="calculator-age" type="number" placeholder="e.g. 28" required>
-            </div>
-            <div class="calculator-col">
-              <label>Gender</label>
-              <div class="calculator-gender-group" role="radiogroup" aria-label="gender">
-                <label><input type="radio" name="calculator-gender" value="male" checked> Male</label>
-                <label><input type="radio" name="calculator-gender" value="female"> Female</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="calculator-row">
-            <div class="calculator-col">
-              <label for="calculator-height">Height (cm)</label>
-              <input id="calculator-height" type="number" placeholder="e.g. 175" required>
-            </div>
-            <div class="calculator-col">
-              <label for="calculator-weight">Weight (kg)</label>
-              <input id="calculator-weight" type="number" placeholder="e.g. 68" required>
-            </div>
-          </div>
-
-          <div class="calculator-row">
-            <div class="calculator-col" style="min-width:240px">
-              <label for="calculator-activity">Activity level</label>
-              <select id="calculator-activity">
-                <option value="1.2" selected>Sedentary — little or no exercise</option>
-                <option value="1.375">Lightly active — 1–3 days/week</option>
-                <option value="1.55">Moderately active — 3–5 days/week</option>
-                <option value="1.725">Very active — 6–7 days/week</option>
-                <option value="1.9">Super active — physical job / very hard</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="calculator-actions">
-            <button type="button" id="calculator-calcBtn">Calculate</button>
-            <button type="button" id="calculator-resetBtn" class="calculator-secondary">Reset</button>
-          </div>
-        </form>
-      </section>
-
-      <!-- Right side: results -->
-      <section class="calculator-card" id="calculator-resultsArea" aria-live="polite" style="display:none">
-        <h2 style="margin:0 0 10px">Results</h2>
-        <div class="calculator-results">
-          <div class="calculator-result-box">
-            <div class="calculator-stat"><div class="calculator-num" id="calculator-bmrNum">0</div><div class="calculator-label">BMR (kcal/day)</div></div>
-            <div class="calculator-stat"><div class="calculator-num" id="calculator-tdeeNum">0</div><div class="calculator-label">TDEE (kcal/day)</div></div>
-            <div class="calculator-note">TDEE = BMR × Activity Factor</div>
-          </div>
-          <div class="calculator-result-box">
-            <div style="font-weight:700;margin-bottom:8px">Macronutrients (approx.)</div>
-            <div class="calculator-macros">
-              <div class="calculator-macro-row">
-                <div class="calculator-macro-left">Carbs</div>
-                <div class="calculator-bar-wrap"><div id="calculator-barCarbs" class="calculator-bar calculator-carbs"></div></div>
-                <div class="calculator-label" id="calculator-carbGrams">0 g</div>
-              </div>
-              <div class="calculator-macro-row">
-                <div class="calculator-macro-left">Protein</div>
-                <div class="calculator-bar-wrap"><div id="calculator-barProtein" class="calculator-bar calculator-protein"></div></div>
-                <div class="calculator-label" id="calculator-proteinGrams">0 g</div>
-              </div>
-              <div class="calculator-macro-row">
-                <div class="calculator-macro-left">Fat</div>
-                <div class="calculator-bar-wrap"><div id="calculator-barFat" class="calculator-bar calculator-fat"></div></div>
-                <div class="calculator-label" id="calculator-fatGrams">0 g</div>
-              </div>
-            </div>
-            <div class="calculator-note">Ratio used: 50% carbs / 20% protein / 30% fat (4/4/9 kcal per gram).</div>
-          </div>
+    <h1>Recipes</h1>
+    <div class="filters-container">
+        <div class="filters">
+            <input type="text" id="search" placeholder="Search by name...">
+            <select id="category">
+                <option value="all">All Categories</option>
+                <option value="dessert">Dessert</option>
+                <option value="main">Main Course</option>
+                <option value="Lunch"> Lunch </option>
+            </select>
         </div>
-      </section>
-  </main>
+    </div>
+    <div class="recipes" id="recipe-list"></div>
+    <div class="modal" id="recipeModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <h3 id="IngredientsTitle">Ingredients</h3>
+            <ul id="modalIngredients"></ul>
+            <h3 id="StepsTitle">Steps</h3>
+            <ol id="modalSteps"></ol>
+            <h3>Nutrition Info</h3>
+            <table id="modalNutrition"></table>
+        </div>
+    </div>
+    <br>
 </div>
 
- </div>
+<!-- Calorie & Nutrition Calculator page -->
+<div id="calculator" class="page">
+    <main class="calculator-wrap">
+        <h1>Calorie & Nutrition Calculator</h1><br>
+        <div class="calculator-content-row">
+            <section class="calculator-card calculator-card-full" aria-labelledby="calcHeading">
+                <h2 id="calcHeading" style="font-size:1.05rem;margin:0 0 10px">Your details</h2>
+                <form id="calculatorForm">
+                    <div class="calculator-row">
+                        <div class="calculator-col">
+                            <label for="calculator-age">Age (years)</label>
+                            <input id="calculator-age" type="number" placeholder="e.g. 28" min="10" max="120" required>
+                        </div>
+                        <div class="calculator-col">
+                            <label>Gender</label>
+                            <div class="calculator-gender-group" role="radiogroup" aria-label="gender">
+                                <label><input type="radio" name="calculator-gender" value="male" checked> Male</label>
+                                <label><input type="radio" name="calculator-gender" value="female"> Female</label>
+                            </div>
+                        </div>
+                    </div>
 
-<!-- Workouts page  -->
- <div id="workouts" class="page">
+                    <div class="calculator-row">
+                        <div class="calculator-col">
+                            <label for="calculator-height">Height (cm)</label>
+                            <input id="calculator-height" type="number" placeholder="e.g. 175" min="80" max="250" required>
+                        </div>
+                        <div class="calculator-col">
+                            <label for="calculator-weight">Weight (kg)</label>
+                            <input id="calculator-weight" type="number" placeholder="e.g. 68" min="25" max="400" required>
+                        </div>
+                    </div>
 
-        <h1>Workouts</h1>
+                    <div class="calculator-row">
+                        <div class="calculator-col" style="min-width:240px">
+                            <label for="calculator-activity">Activity level</label>
+                            <select id="calculator-activity">
+                                <option value="1.2" selected>Sedentary — little or no exercise</option>
+                                <option value="1.375">Lightly active — 1–3 days/week</option>
+                                <option value="1.55">Moderately active — 3–5 days/week</option>
+                                <option value="1.725">Very active — 6–7 days/week</option>
+                                <option value="1.9">Super active — physical job / very hard</option>
+                            </select>
+                        </div>
+                    </div>
 
- </div>
+                    <div class="calculator-actions">
+                        <button type="button" id="calculator-calcBtn">Calculate</button>
+                        <button type="button" id="calculator-resetBtn" class="calculator-secondary">Reset</button>
+                    </div>
+                </form>
+            </section>
 
-<!-- Mindfulness page  -->
+            <section class="calculator-card" id="calculator-resultsArea" aria-live="polite">
+                <h2 style="margin:0 0 10px">Results</h2>
+                <div class="calculator-results">
+                    <div class="calculator-result-box">
+                        <div class="calculator-stat"><div class="calculator-num" id="calculator-bmrNum">0</div><div class="calculator-label">BMR (kcal/day)</div></div>
+                        <div class="calculator-stat"><div class="calculator-num" id="calculator-tdeeNum">0</div><div class="calculator-label">TDEE (kcal/day)</div></div>
+                        <div class="calculator-note">TDEE = BMR × Activity Factor</div>
+                    </div>
+                    <div class="calculator-result-box">
+                        <div style="font-weight:700;margin-bottom:8px">Macronutrients (approx.)</div>
+                        <div class="calculator-macros">
+                            <div class="calculator-macro-row">
+                                <div class="calculator-macro-left">Carbs</div>
+                                <div class="calculator-bar-wrap"><div id="calculator-barCarbs" class="calculator-bar calculator-carbs"></div></div>
+                                <div class="calculator-label" id="calculator-carbGrams">0 g</div>
+                            </div>
+                            <div class="calculator-macro-row">
+                                <div class="calculator-macro-left">Protein</div>
+                                <div class="calculator-bar-wrap"><div id="calculator-barProtein" class="calculator-bar calculator-protein"></div></div>
+                                <div class="calculator-label" id="calculator-proteinGrams">0 g</div>
+                            </div>
+                            <div class="calculator-macro-row">
+                                <div class="calculator-macro-left">Fat</div>
+                                <div class="calculator-bar-wrap"><div id="calculator-barFat" class="calculator-bar calculator-fat"></div></div>
+                                <div class="calculator-label" id="calculator-fatGrams">0 g</div>
+                            </div>
+                        </div>
+                        <div class="calculator-note">Ratio used: 50% carbs / 20% protein / 30% fat (4/4/9 kcal per gram).</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
+
+<!-- Workouts page -->
+<div id="workouts" class="page">
+    <h1>Workout Generator</h1>
+    <div class="workout-generator">
+        
+        <div class="form-group">
+            <label for="body-part">Body Part:</label>
+            <select id="body-part">
+                <option value="full">Full Body</option>
+                <option value="arms">Arms</option>
+                <option value="legs">Legs</option>
+                <option value="core">Core</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="equipment">Equipment:</label>
+            <select id="equipment">
+                <option value="none">No Equipment</option>
+                <option value="dumbbells">Dumbbells</option>
+            </select>
+        </div>
+        <button id="generate-btn">Generate Workout</button>
+        <div id="selection-info" class="selection-info">
+            Select exercises to include in your workout
+        </div>
+        <div id="workout-plan" class="workout-plan">
+            <h2>Your Workout Plan</h2>
+            <p class="instruction-text">Select at least one exercise to start the timer</p>
+            <div id="exercises-container"></div>
+            <button id="start-timer">Start Timer for Selected Exercises</button>
+            <button id="reset-selection" class="reset-btn">Reset Selection</button>
+        </div>
+        <div id="timer-container" class="timer-container">
+            <h2>Current Exercise</h2>
+            <div id="current-exercise" class="exercise-title"></div>
+            <div id="set-info" class="set-info"></div>
+            <div id="timer-display">00:00</div>
+            <div id="exercise-instructions" class="exercise-details"></div>
+            <button id="continue-btn" class="continue-btn">Continue Workout</button>
+            <div class="timer-controls">
+                <button id="pause-timer">Pause Timer</button>
+                <button id="resume-timer" class="continue-btn" style="display: none;">Resume Timer</button>
+            </div>
+        </div>
+        <div id="completed-workout" class="completed">
+            <i class="fas fa-check-circle" style="font-size: 3rem; margin-bottom: 10px;"></i>
+            <p>Workout Complete! Great job!</p>
+            <button id="new-workout-btn">Generate New Workout</button>
+        </div>
+    </div>
+</div>
+
+<!-- Mindfulness page -->
 <div id="mindfulness" class="page">
-
-  <!-- Breathing Exercise -->
-  <div class="breathing-section">
-    <img src="heart.png" alt="Breathing Heart" id="heart">
-    <p id="breathText">Ready</p>
-    <div class="button-row">
-      <button onclick="startBreathing()">Start Breathing</button>
-      <button onclick="stopBreathing()">Stop Breathing</button>
+    <h1>Mindfulness</h1>
+    <div class="breathing-section">
+        <img src="heart.png" alt="Breathing Heart" id="heart">
+        <p id="breathText">Ready</p>
+        <div class="button-row">
+            <button onclick="startBreathing()">Start Breathing</button>
+            <button onclick="stopBreathing()">Stop Breathing</button>
+        </div>
     </div>
-  </div>
-
-  <!-- Tools Row (Timer + Sounds + Sessions) -->
-  <div class="tools-row">
-
-    <!-- Meditation Timer -->
-    <div class="tool timer">
-      <h3 id="Meditation_heading" >Meditation Timer</h3>
-      <select id="timerSelect">
-        <option value="1">1 min</option>
-        <option value="5">5 min</option>
-        <option value="10">10 min</option>
-        <option value="15">15 min</option>
-        <option value="20">20 min</option>
-        <option value="30">30 min</option>
-      </select>
-      <div id="timerDisplay">00:00</div>
-      <div class="button-row">
-        <button onclick="startTimer()">Start Timer</button>
-        <button onclick="stopTimer()">Stop Timer</button>
-      </div>
+    <div class="tools-row">
+        <div class="tool timer">
+            <h3>Meditation Timer</h3>
+            <select id="timerSelect">
+                <option value="1">1 min</option>
+                <option value="5">5 min</option>
+                <option value="10">10 min</option>
+            </select>
+            <div id="timerDisplay">00:00</div>
+            <div class="button-row">
+                <button onclick="startTimer()">Start Timer</button>
+                <button onclick="stopTimer()">Stop Timer</button>
+            </div>
+        </div>
+        <div class="tool sounds">
+            <h3>Ambient Sounds</h3>
+            <select id="sound_Select">
+                <option value="rain.mp3">Rain</option>
+                <option value="waves.mp3">Waves</option>
+                <option value="forest.mp3">Forest</option>
+            </select>
+            <div class="button-row">
+                <button onclick="startSound()">Start Sound</button>
+                <button onclick="stopSound()">Stop Sound</button>
+            </div>
+        </div>
+        <div class="tool tracker">
+            <h3>Sessions Completed</h3>
+            <p id="sessionTracker">0</p>
+        </div>
     </div>
-
-    <!-- Ambient Sound Selector -->
-    <div class="tool sounds">
-      <h3 id="sound_heading" >Ambient Sounds</h3>
-      <select id="sound_Select">
-        <option value="rain.mp3">Rain</option>
-        <option value="waves.mp3">Waves</option>
-        <option value="forest.mp3">Forest</option>
-      </select>
-      <div class="button-row" id="ambient_button">
-        <button onclick="startSound()">Start Sound</button>
-        <button onclick="stopSound()">Stop Sound</button>
-      </div>
-    </div>
-
-    <!-- Session Tracker -->
-    <div class="tool tracker">
-      <h3>Sessions Completed</h3>
-      <p id="sessionTracker">0</p>
-    </div>
-
-  </div>
 </div>
 
-
-<!-- Contact page  -->
+<!-- Contact page -->
 <div id="contact" class="page">
     <div class="contact_page">
-    
-    <div class="feedback_div"> 
-        <h2>Feedback Form</h2><br> 
-    <form id="feedbackForm">
-            <label for="name">Name</label>
-            <input type="text" id="name" class="feedback_input"  placeholder="Enter Your Name" required>
-
-            <label for="email">Email</label>
-            <input type="email" id="email" class="feedback_input" placeholder="Enter Your Email" required>
-
-            <label for="message">Message</label>
-            <textarea type="text" id="message" class="feedback_input" placeholder="Enter Your Message Here" required></textarea>
-
-            <label>Feedback Type</label>
-            <div class="radio-group">
-                <label><input type="radio" name="type" value="Comment" required> Comment</label>
-                <label><input type="radio" name="type" value="Suggestion"> Suggestion</label>
-                <label><input type="radio" name="type" value="Question"> Question</label>
-            </div>
-
-            <div class="button-container">
-                <button type="submit" id="feedback_button">Submit</button>
-            </div> 
-            <div class="confirmation" id="confirmation"></div>
-             
-        </form><br>
+        <div class="feedback_div"> 
+            <h2>Feedback Form</h2><br> 
+            <form id="feedbackForm">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter Your Name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter Your Email" required>
+                <label for="message">Message</label>
+                <textarea id="message" placeholder="Enter Your Message Here" required></textarea>
+                <label>Feedback Type</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="type" value="Comment" required> Comment</label>
+                    <label><input type="radio" name="type" value="Suggestion"> Suggestion</label>
+                    <label><input type="radio" name="type" value="Question"> Question</label>
+                </div>
+                <div class="button-container">
+                    <button type="submit" id="feedback_button">Submit</button>
+                </div> 
+                <div class="confirmation" id="confirmation"></div>
+            </form><br>
         </div>  
-
-    <div class="location_div">
-        <h2>Our Location</h2>
-        <div class="map"> 
-            <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d126744.50294531073!2d79.77882695866951!3d6.918588214221316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3ae2596d3cb8fe07%3A0x2b0ae2edd563a661!2sNo.%20388%20Union%20Pl%2C%20Colombo%2000200!3m2!1d6.9185953!2d79.8612289!5e0!3m2!1sen!2slk!4v1756636592113!5m2!1sen!2slk" 
-            width="900" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-         </div>
+        <div class="location_div">
+            <h2>Our Location</h2>
+            <div class="map"> 
+                <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d126744.50294531073!2d79.77882695866951!3d6.918588214221316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3ae2596d3cb8fe07%3A0x2b0ae2edd563a661!2sNo.%20388%20Union%20Pl%2C%20Colombo%2000200!3m2!1d6.9185953!2d79.8612289!5e0!3m2!1sen!2slk!4v1756636592113!5m2!1sen!2slk" 
+                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
     </div>
-    </div>
-        <br><h2>FAQs</h2>
+    <div class="faq-section">
+        <h2>FAQs</h2>
         <div class="faq">
             <div class="faq-item">
                 <h4>What is GreenBite?</h4>
-                 <p>GreenBite is your trusted partner for healthy food choices and tips.</p>
+                <p>GreenBite is your trusted partner for healthy food choices and tips.</p>
             </div>
-
             <div class="faq-item">
                 <h4>Where is GreenBite HQ located?</h4>
                 <p>We are located in Colombo, Sri Lanka.</p>
-             </div>
-        
+            </div>
             <div class="faq-item">
                 <h4>How can I submit feedback?</h4>
-                 <p>You can use the feedback form above to send us your comments, suggestions, or questions.</p>
-             </div>
+                <p>You can use the feedback form above to send us your comments, suggestions, or questions.</p>
+            </div>
         </div>
- </div>
+    </div>
 </div>
+</div>
+<!-- Footer -->
 <footer>
     <div class="footer-container">
         <div class="footer-left">
             <p>Want to get weekly newsletters on how to live healthy?</p>
             <p>Signup today for our newsletter.</p>
-      
             <form id="newsletterForm">
                 <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
-                <button type="submit" id="btn">Subscribe</button>
+                <button type="submit">Subscribe</button>
             </form>
         </div>
-
         <div class="footer-divider"></div>
-
         <div class="footer-right">
-            
             <p>Follow us on</p>
-
             <div class="social-links">
                 <a href="https://www.youtube.com/">
-                <img src="youtube.png" alt="YouTube logo"> YouTube </a>
-        
+                    <img src="youtube.png" alt="YouTube logo"> YouTube
+                </a>
                 <a href="https://www.instagram.com/">
-                <img src="instagram.jpeg" alt="Instagram logo"> Instagram </a>
-        
+                    <img src="instagram.jpeg" alt="Instagram logo"> Instagram
+                </a>
                 <a href="https://www.facebook.com/">
-                <img src="facebook.png" alt="Facebook logo"> Facebook </a>
-        
+                    <img src="facebook.png" alt="Facebook logo"> Facebook
+                </a>
                 <a href="https://www.tiktok.com/explore">
-                <img src="tiktok.png" alt="TikTok logo"> TikTok </a>
+                    <img src="tiktok.png" alt="TikTok logo"> TikTok
+                </a>
             </div>
         </div>
     </div>
@@ -331,8 +352,6 @@
         <p>&copy; 2025 GreenBite. All rights reserved.</p>
     </div>
 </footer>
-  
 <script src="app.js"></script>
-
 </body>
 </html>
