@@ -1,11 +1,10 @@
 const CACHE_NAME = 'wdos-pwa-v1';
 const ASSETS = [
-  'index.html',
-  'styles.css',
-  'app.js',
-  'offline.html',
-  'icons/icon-192.png',
-  'icons/icon-512.png'
+  './index.html',
+  './styles.css?v=1.3',
+  './app.js?v=1.3',
+  './icons/icon-192.png',
+  './icons/icon-512.png'
 ];
 
 // Install: pre-cache core assets

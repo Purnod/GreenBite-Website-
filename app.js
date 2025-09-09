@@ -158,7 +158,7 @@ let recipes = [
 {
     name: "chickpea salad",
     category: "Lunch",
-    image: "https://www.themediterraneandish.com/wp-content/uploads/2023/12/TMD-Chickpea-Salad-Leads-01-Angle-Horizontal.jpg",
+    image: "chickpea salad.jpg",
     description: "High-protein chickpeas with crunchy veggies",
     ingredients: [ "1 can chickpeas (drained)", "1 cucumber (diced)", "1 tomato (diced)", "1/4 red onion (thinly sliced)", "2 tbsp olive oil", "1 lemon (juiced)", "Salt & pepper"],
     steps: [ "Combine chickpeas and chopped veggies in a bowl.", "Whisk olive oil, lemon juice, salt and pepper.", "Toss together and serve chilled."],
@@ -886,4 +886,12 @@ if (form && emailInput) {
     alert("Subscribed!");
     emailInput.value = "";
     });
-}   
+}  
+
+// service worker registration 
+
+if ('serviceWorker' in navigator){
+    navigator.serviceWorker.register('sw.js')
+    .then(()=> console.log('service Worker registered. '))
+    .catch(err => console.log('sw registration failed', err))
+}
